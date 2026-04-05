@@ -49,8 +49,11 @@ const SCENARIO_FULL_PAGE_SLUGS = new Set([
   "warehouse-restock",
 ]);
 
+const queryClient = new QueryClient();
+
 function App() {
   return (
+    <QueryClientProvider client={queryClient}>
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
       <TooltipProvider>
         <Toaster />
