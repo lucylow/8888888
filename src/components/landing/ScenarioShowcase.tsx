@@ -11,42 +11,48 @@ const scenarios = [
     title: "Dynamic Relay Chain",
     desc: "Drones self-organize into a communication chain that adapts as signal degrades deeper into the tunnel.",
     to: "/scenarios/search-rescue",
-    accent: "from-primary/15 to-primary/5",
+    accentColor: "from-primary/20 to-primary/5",
+    iconBg: "bg-primary/10 border-primary/20",
   },
   {
     icon: Unplug,
     title: "Collapsing Tunnel",
     desc: "Simulate structural collapse — watch the swarm detect heartbeat loss and reform the relay chain in under two seconds.",
     to: "/scenarios/collapsing-tunnel",
-    accent: "from-accent/15 to-accent/5",
+    accentColor: "from-accent/20 to-accent/5",
+    iconBg: "bg-accent/10 border-accent/20",
   },
   {
     icon: HeartPulse,
     title: "Battery Cascade",
     desc: "Agents deplete batteries at different rates. The swarm promotes standby nodes and rotates roles to sustain the mission.",
     to: "/scenarios/battery-cascade",
-    accent: "from-primary/12 to-primary/5",
+    accentColor: "from-primary/15 to-primary/5",
+    iconBg: "bg-primary/10 border-primary/15",
   },
   {
     icon: RefreshCw,
     title: "Random Failure",
     desc: "Inject faults at random intervals. Observe self-healing consensus and automatic relay insertion without central control.",
     to: "/scenarios/random-failure",
-    accent: "from-destructive/10 to-destructive/5",
+    accentColor: "from-destructive/12 to-destructive/5",
+    iconBg: "bg-destructive/10 border-destructive/15",
   },
   {
     icon: Target,
     title: "Magnetic Attraction",
     desc: "Agents converge on victim heat signatures using decentralized priority scoring and stake-weighted triage.",
     to: "/scenarios/magnetic-attraction",
-    accent: "from-accent/12 to-accent/5",
+    accentColor: "from-accent/15 to-accent/5",
+    iconBg: "bg-accent/10 border-accent/15",
   },
   {
     icon: Zap,
     title: "Stake Voting",
     desc: "Agents vote on path selection using BFT consensus weighted by stake — the swarm decides collectively which fork to take.",
     to: "/scenarios/stake-voting",
-    accent: "from-primary/15 to-primary/5",
+    accentColor: "from-primary/18 to-primary/5",
+    iconBg: "bg-primary/10 border-primary/20",
   },
 ];
 
@@ -59,7 +65,7 @@ export default function ScenarioShowcase() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease }}
-          className="mb-10"
+          className="mb-12"
         >
           <span className="font-mono text-xs text-primary/80 tracking-[0.22em] uppercase inline-flex items-center gap-2">
             <span className="w-8 h-px bg-primary/40" />
@@ -74,41 +80,51 @@ export default function ScenarioShowcase() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {scenarios.map((s, i) => (
             <motion.div
               key={s.title}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.05, duration: 0.45, ease }}
+              transition={{ delay: i * 0.06, duration: 0.5, ease }}
             >
               <Link
                 to={s.to}
-                className="group block rounded-2xl border border-border/50 bg-card/30 backdrop-blur-md p-5 sm:p-6 card-hover h-full"
+                className="group relative block rounded-2xl border border-border/40 bg-card/20 backdrop-blur-md p-5 sm:p-6 card-hover h-full overflow-hidden"
               >
-                <div className={`inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br ${s.accent} border border-primary/15 mb-3`}>
-                  <s.icon className="w-4 h-4 text-primary" />
+                {/* Subtle gradient accent on hover */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${s.accentColor} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                
+                <div className="relative z-10">
+                  <div className={`inline-flex items-center justify-center w-10 h-10 rounded-xl ${s.iconBg} border mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                    <s.icon className="w-4.5 h-4.5 text-foreground/80" />
+                  </div>
+                  <h3 className="font-semibold text-foreground text-base mb-2">{s.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+                  <span className="inline-flex items-center gap-1.5 text-xs text-primary/60 mt-4 group-hover:text-primary transition-colors duration-300 font-medium">
+                    Run scenario
+                    <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" />
+                  </span>
                 </div>
-                <h3 className="font-semibold text-foreground text-base mb-1.5">{s.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
-                <span className="inline-flex items-center gap-1 text-xs text-primary/70 mt-3 group-hover:text-primary transition-colors">
-                  Run scenario
-                  <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-                </span>
               </Link>
             </motion.div>
           ))}
         </div>
 
-        <div className="mt-8 text-center">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mt-10 text-center"
+        >
           <Link to="/dashboard/scenarios">
-            <Button variant="outline" size="sm" className="rounded-full border-border/60 text-muted-foreground hover:text-foreground">
+            <Button variant="outline" size="sm" className="rounded-full border-border/50 text-muted-foreground hover:text-foreground hover:border-primary/20 transition-all duration-300">
               View all scenarios
               <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
             </Button>
           </Link>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
