@@ -10,7 +10,7 @@ export default function SystemHealthBadge() {
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: 0.3, duration: 0.4 }}
-      className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full border border-border/40 bg-card/40 backdrop-blur-md text-[10px] sm:text-[11px] font-mono"
+      className="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-full border border-border/30 bg-card/30 backdrop-blur-xl text-[11px] font-mono group hover:border-primary/20 transition-colors duration-300"
     >
       <span className="relative flex h-2 w-2">
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-50" />
