@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/toaster";
@@ -48,8 +49,11 @@ const SCENARIO_FULL_PAGE_SLUGS = new Set([
   "warehouse-restock",
 ]);
 
+const queryClient = new QueryClient();
+
 function App() {
   return (
+    <QueryClientProvider client={queryClient}>
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
       <TooltipProvider>
         <Toaster />
@@ -106,6 +110,7 @@ function App() {
         </BrowserRouter>
       </TooltipProvider>
     </ThemeProvider>
+    </QueryClientProvider>
   );
 }
 
