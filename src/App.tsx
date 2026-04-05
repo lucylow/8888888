@@ -110,6 +110,7 @@ function App() {
         </BrowserRouter>
       </TooltipProvider>
     </ThemeProvider>
+    </QueryClientProvider>
   );
 }
 
